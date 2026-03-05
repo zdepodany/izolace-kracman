@@ -1,4 +1,4 @@
+# Poslední úprava: 5. 3. 2026
 User-agent: *
 Allow: /
-Disallow: /img/
 Sitemap: https://izolacekracman.cz/sitemap.xml 
