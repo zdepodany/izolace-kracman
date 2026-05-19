@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Izolace Znojmo – Hydroizolace střech | Petr Kráčman</title>
-    
-    <!-- Favicon -->
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    
-    <meta name="description" content="Specialista na izolace a hydroizolace střech, teras i základů v okolí Znojma. 19 let zkušeností, kvalitní materiály a záruka na práci.">
+
+    <meta name="description" content="Specialista na izolace a hydroizolace střech, teras i základů v okolí Znojma. 20 let zkušeností, kvalitní materiály a záruka na práci.">
     <meta name="keywords" content="hydroizolace, zateplení střech, izolace střech, izolace teras, izolace balkónů, Znojmo, Brno, Třebíč">
     <meta name="author" content="Petr Kráčman">
     <meta name="robots" content="index, follow">
@@ -20,11 +19,13 @@
       "@context": "https://schema.org",
       "@type": ["LocalBusiness", "RoofingContractor"],
       "name": "Hydroizolace Petr Kráčman",
-      "description": "Specialista na izolace a hydroizolace střech, teras i základů v okolí Znojma. 19 let zkušeností, kvalitní materiály a záruka na práci.",
+      "description": "Specialista na izolace a hydroizolace střech, teras i základů v okolí Znojma. 20 let zkušeností, kvalitní materiály a záruka na práci.",
       "url": "https://izolacekracman.cz",
       "telephone": "+420 722 917 907",
       "email": "kracmanp@seznam.cz",
       "taxID": "23028742",
+      "foundingYear": 2006,
+      "sameAs": ["https://ares.gov.cz/ekonomicke-subjekty/res/23028742"],
       "image": "https://izolacekracman.cz/og-image.jpg",
       "address": {
         "@type": "PostalAddress",
@@ -63,7 +64,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://izolacekracman.cz">
     <meta property="og:title" content="Izolace Znojmo – Hydroizolace střech | Petr Kráčman">
-    <meta property="og:description" content="Provádíme izolace a hydroizolace střech, teras i základů v okolí Znojma. 19 let zkušeností, férový přístup a záruka na práci.">
+    <meta property="og:description" content="Provádíme izolace a hydroizolace střech, teras i základů v okolí Znojma. 20 let zkušeností, férový přístup a záruka na práci.">
     <meta property="og:image" content="https://izolacekracman.cz/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -73,8 +74,8 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://izolacekracman.cz">
-    <meta property="twitter:title" content="Hydroizolace | Petr Kráčman">
-    <meta property="twitter:description" content="Profesionální hydroizolace a zateplení střech v okolí Znojma, Brna a Třebíče. 19 let zkušeností, kvalitní materiály a záruka na provedené práce.">
+    <meta property="twitter:title" content="Izolace Znojmo – Hydroizolace střech | Petr Kráčman">
+    <meta property="twitter:description" content="Profesionální hydroizolace a zateplení střech v okolí Znojma, Brna a Třebíče. 20 let zkušeností, kvalitní materiály a záruka na provedené práce.">
     <meta property="twitter:image" content="https://izolacekracman.cz/og-image.jpg">
     <meta property="twitter:image:alt" content="Hydroizolace a izolace střech – Znojmo a okolí">
 
@@ -87,363 +88,598 @@
         gtag('config', 'G-VL76XQV64S');
     </script>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
+        * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { font-family: 'Outfit', ui-sans-serif, system-ui, sans-serif; }
+
+        /* ── Hero ── */
         .hero-pattern {
             background-image: url('img/herobg.webp');
             background-size: cover;
             background-position: center;
         }
-        #cookieConsent {
-            transition: transform 0.3s ease-in-out;
+        .hero-overlay {
+            background: linear-gradient(
+                to right,
+                rgba(8, 18, 36, 0.88) 0%,
+                rgba(8, 18, 36, 0.60) 55%,
+                rgba(8, 18, 36, 0.18) 100%
+            );
         }
-        #cookieConsent.hidden {
-            transform: translateY(100%);
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-animate {
+            animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+        }
+
+        /* ── Sticky nav ── */
+        #site-header { transition: background 0.3s ease, box-shadow 0.3s ease; }
+        #site-header.scrolled {
+            background: rgba(255,255,255,0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 rgba(15,23,42,0.08);
+        }
+
+        /* ── Nav link hover underline ── */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px; left: 0; right: 0;
+            height: 1.5px;
+            background: #1d4ed8;
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+        .nav-link:hover::after { transform: scaleX(1); }
+
+        /* ── Scroll reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
+                        transform 0.65s cubic-bezier(0.16,1,0.3,1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.10s; }
+        .reveal-delay-2 { transition-delay: 0.20s; }
+        .reveal-delay-3 { transition-delay: 0.30s; }
+
+        /* ── Image zoom ── */
+        .img-zoom { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .img-zoom-wrap:hover .img-zoom { transform: scale(1.05); }
+
+        /* ── Buttons ── */
+        .btn-primary {
+            transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+        }
+        .btn-primary:hover { box-shadow: 0 4px 18px rgba(29,78,216,0.28); }
+        .btn-primary:active { transform: scale(0.98) translateY(1px); }
+        .btn-outline { transition: background 0.2s ease, border-color 0.2s ease; }
+        .btn-outline:hover { background: rgba(255,255,255,0.10); }
+        .btn-outline:active { transform: scale(0.98); }
+        .btn-ghost { transition: background 0.2s ease; }
+        .btn-ghost:active { transform: scale(0.98); }
+
+        /* ── Section label ── */
+        .section-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            color: #1d4ed8;
+        }
+
+        /* ── Stat numbers ── */
+        .stat-num {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+        }
+
+        /* ── Form inputs ── */
+        .form-input {
+            transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 3px rgba(29,78,216,0.12);
+            background: #ffffff;
+        }
+
+        /* ── Cookie consent ── */
+        #cookieConsent { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+        #cookieConsent.hidden { transform: translateY(110%); }
+
+        /* ── Skip link ── */
+        .skip-link {
+            position: absolute; top: -48px; left: 0;
+            background: #1d4ed8; color: #fff;
+            padding: 8px 16px; z-index: 100;
+            border-radius: 0 0 8px 0;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ── Gallery focus ── */
+        .gallery-item:focus-visible {
+            outline: 2px solid #1d4ed8;
+            outline-offset: 4px;
+            border-radius: 16px;
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="text-3xl font-bold text-gray-800 tracking-tight hover:text-blue-600 transition-colors duration-300 cursor-default">Hydroizolace Petr Kráčman</div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#o-nas" class="text-gray-600 hover:text-gray-900">O nás</a>
-                    <a href="#sluzby" class="text-gray-600 hover:text-gray-900">Služby</a>
-                    <a href="#proc-izolovat" class="text-gray-600 hover:text-gray-900">Proč izolovat</a>
-                    <a href="#kontakt" class="text-gray-600 hover:text-gray-900">Kontakt</a>
-                </div>
+<body class="bg-slate-50 text-slate-900">
+    <!-- Skip to content -->
+    <a href="#o-nas" class="skip-link">Přejít na obsah</a>
+
+    <!-- ── HEADER ── -->
+    <header id="site-header" class="fixed top-0 left-0 right-0 z-40">
+        <nav class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#" class="nav-logo text-xl font-bold tracking-tight text-white transition-colors duration-300">
+                Hydroizolace Petr Kráčman<span class="text-blue-400">.</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#o-nas"          class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors duration-200">O nás</a>
+                <a href="#sluzby"         class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors duration-200">Služby</a>
+                <a href="#proc-izolovat"  class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors duration-200">Proč izolovat</a>
+                <a href="#kontakt" class="nav-cta btn-primary bg-blue-700 hover:bg-blue-800 text-white text-sm font-medium px-5 py-2.5 rounded-lg">Kontakt</a>
             </div>
+            <button id="mobile-menu-btn" class="md:hidden text-white p-2 -mr-2" aria-label="Otevřít menu">
+                <i class="fas fa-bars text-lg"></i>
+            </button>
         </nav>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-6 py-4 space-y-1">
+            <a href="#o-nas"         class="block text-slate-700 hover:text-blue-700 font-medium py-2.5 transition-colors">O nás</a>
+            <a href="#sluzby"        class="block text-slate-700 hover:text-blue-700 font-medium py-2.5 transition-colors">Služby</a>
+            <a href="#proc-izolovat" class="block text-slate-700 hover:text-blue-700 font-medium py-2.5 transition-colors">Proč izolovat</a>
+            <a href="#kontakt"       class="block bg-blue-700 text-white text-center py-3 rounded-lg font-medium mt-2">Kontakt</a>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-pattern h-screen flex items-center">
-        <div class="container mx-auto px-6">
-            <div class="bg-white bg-opacity-90 p-8 rounded-lg max-w-2xl">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Profesionální izolace a zateplení střech</h1>
-                <p class="text-xl text-gray-600 mb-8">Poskytujeme izolace i hydroizolace pro domy, terasy a balkóny – především ve Znojmě a okolí.</p>
-                <div class="flex flex-wrap gap-4 mb-6">
-                    <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm">Znojmo</span>
-                    <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm">Brno</span>
-                    <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm">Třebíč</span>
-                </div>
-                <a href="#kontakt" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Kontaktujte nás</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- O nás -->
-    <section id="o-nas" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12">O nás</h2>
-            <div class="max-w-3xl mx-auto text-center">
-                <p class="text-gray-600 text-lg mb-6">
-                    Jmenuji se Petr Kráčman a v oboru hydroizolací a zateplení střech působím již <span id="years-of-experience" class="font-bold text-blue-600">19</span> let. Každý projekt beru jako výzvu a kladu důraz na kvalitu provedení a spokojenost zákazníků. Věnuji se <strong>hydroizolacím i obecným izolacím</strong> různých částí staveb – od střech až po základy. Působím převážně ve Znojmě, Brně a Třebíči.
+    <!-- ── HERO ── -->
+    <section class="hero-pattern relative min-h-[100dvh] flex items-end pb-20 md:pb-28">
+        <div class="hero-overlay absolute inset-0 pointer-events-none"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <div class="max-w-2xl hero-animate">
+                <span class="section-label text-blue-300 mb-5 block">Odborná hydroizolace od roku 2006</span>
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05] mb-6">
+                    Izolace, která<br>ochrání váš dům
+                </h1>
+                <p class="text-slate-300 text-lg md:text-xl mb-8 max-w-lg leading-relaxed">
+                    Hydroizolace střech, teras a základů ve Znojmě a okolí. Férová cena, záruka na práci.
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                    <div class="p-6 bg-gray-50 rounded-lg">
-                        <i class="fas fa-medal text-4xl text-blue-600 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2">Kvalita</h3>
-                        <p class="text-gray-600">Používáme pouze nejkvalitnější materiály a postupy</p>
-                    </div>
-                    <div class="p-6 bg-gray-50 rounded-lg">
-                        <i class="fas fa-clock text-4xl text-blue-600 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2">Rychlost</h3>
-                        <p class="text-gray-600">Dodržujeme termíny a pracujeme efektivně</p>
-                    </div>
-                    <div class="p-6 bg-gray-50 rounded-lg">
-                        <i class="fas fa-handshake text-4xl text-blue-600 mb-4"></i>
-                        <h3 class="text-xl font-semibold mb-2">Spolehlivost</h3>
-                        <p class="text-gray-600">Garantuji kvalitu a spokojenost zákazníků</p>
-                    </div>
+                <div class="flex flex-wrap gap-2 mb-10">
+                    <span class="text-white/60 text-xs border border-white/20 px-3 py-1.5 rounded-full">Znojmo</span>
+                    <span class="text-white/60 text-xs border border-white/20 px-3 py-1.5 rounded-full">Brno</span>
+                    <span class="text-white/60 text-xs border border-white/20 px-3 py-1.5 rounded-full">Třebíč</span>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#kontakt" class="btn-primary bg-blue-700 hover:bg-blue-800 text-white px-7 py-3.5 rounded-lg font-medium text-sm">
+                        Získejte nabídku zdarma
+                    </a>
+                    <a href="#sluzby" class="btn-outline border border-white/30 text-white px-7 py-3.5 rounded-lg font-medium text-sm">
+                        Naše služby
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Služby -->
-    <section id="sluzby" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12">Naše služby</h2>
-            <div class="max-w-3xl mx-auto text-center mb-12">
-                <p class="text-gray-600 text-lg">
-                    Všechny služby poskytujeme včetně kompletní dodávky materiálu. Na veškeré provedené izolatérské práce poskytujeme záruku. Cenové nabídky zpracováváme zdarma a na míru vašim potřebám.
+    <!-- ── O NÁS ── -->
+    <section id="o-nas" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-16 xl:gap-24 items-start">
+                <!-- Left: content -->
+                <div class="reveal">
+                    <span class="section-label mb-5 block">O nás</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight mb-6">
+                        <span id="years-of-experience" class="text-blue-700">20</span> let zkušeností<br>v oboru izolací
+                    </h2>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-5 max-w-[60ch]">
+                        Jmenuji se Petr Kráčman a v oboru hydroizolací a zateplení střech působím od roku 2006. Každý projekt beru jako výzvu a kladu důraz na kvalitu provedení a spokojenost zákazníků.
+                    </p>
+                    <p class="text-slate-500 leading-relaxed max-w-[60ch]">
+                        Věnuji se <strong class="text-slate-700 font-medium">hydroizolacím i obecným izolacím</strong> různých částí staveb – od střech až po základy. Působím převážně ve Znojmě, Brně a Třebíči.
+                    </p>
+                </div>
+                <!-- Right: stats panel -->
+                <div class="reveal reveal-delay-2">
+                    <div class="rounded-2xl border border-slate-200 overflow-hidden divide-y divide-slate-100">
+                        <div class="bg-white px-7 py-6">
+                            <div class="text-4xl font-bold text-blue-700 stat-num mb-1">od 2006</div>
+                            <div class="text-slate-500 text-sm">rok zahájení činnosti</div>
+                        </div>
+                        <div class="bg-white px-7 py-6">
+                            <div class="text-4xl font-bold text-blue-700 stat-num mb-1">100 %</div>
+                            <div class="text-slate-500 text-sm">projektů s garancí kvality</div>
+                        </div>
+                        <div class="bg-white px-7 py-6">
+                            <div class="text-4xl font-bold text-blue-700 stat-num mb-1">3 kraje</div>
+                            <div class="text-slate-500 text-sm">Znojmo, Brno, Třebíč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SLUŽBY ── -->
+    <section id="sluzby" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 reveal">
+                <span class="section-label mb-3 block">Služby</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">Naše služby</h2>
+                <p class="text-slate-600 max-w-xl leading-relaxed">
+                    Všechny služby poskytujeme včetně kompletní dodávky materiálu. Na veškeré izolatérské práce poskytujeme záruku. Cenové nabídky zpracováváme zdarma.
                 </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg shadow-md">
-                    <img src="img/body_1.webp" alt="Hydroizolace střechy" class="w-full h-full object-cover">
+
+            <div class="space-y-20">
+                <!-- Block 1: Obrázek vlevo, text vpravo -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-16 items-center reveal">
+                    <div class="img-zoom-wrap overflow-hidden rounded-2xl aspect-video">
+                        <img src="img/body_1.webp" alt="Hydroizolace ploché střechy" class="img-zoom w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-slate-900 mb-4">Hydroizolace střech</h3>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            Specializujeme se na PVC hydroizolace plochých střech rodinných domků a bytových domů. Nabízíme kompletní realizace střech včetně klempířských prvků a prací na míru.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-blue-700 text-xs"></i>
+                                </span>
+                                <span class="text-slate-700">Ploché střechy rodinných domů</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-blue-700 text-xs"></i>
+                                </span>
+                                <span class="text-slate-700">Ploché střechy bytových domů</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-blue-700 text-xs"></i>
+                                </span>
+                                <span class="text-slate-700">Klempířské prvky a práce</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-blue-700 text-xs"></i>
+                                </span>
+                                <span class="text-slate-700">Kompletní realizace střech</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-blue-700 text-xs"></i>
+                                </span>
+                                <span class="text-slate-700">Kompletní dodávka materiálu</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-blue-700 text-xs"></i>
+                                </span>
+                                <span class="text-slate-700">Záruka na provedené práce</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg shadow-md">
-                    <img src="img/body_2.webp" alt="Izolační práce" class="w-full h-full object-cover">
-                </div>
-                <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg shadow-md">
-                    <img src="img/body_3.webp" alt="Profesionální izolace" class="w-full h-full object-cover">
+
+                <!-- Block 2: Text vlevo, obrázek vpravo -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-16 items-center reveal">
+                    <div class="order-2 lg:order-1">
+                        <h3 class="text-3xl font-bold text-slate-900 mb-4">Další izolační práce</h3>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            Kromě střech nabízíme také izolace teras, balkónů, zahradních jezírek a spodní izolace staveb proti radonu a zemní vlhkosti.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-blue-700 text-xs"></i>
+                                </span>
+                                <span class="text-slate-700">Izolace teras a balkónů</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-blue-700 text-xs"></i>
+                                </span>
+                                <span class="text-slate-700">Zahradní jezírka</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-blue-700 text-xs"></i>
+                                </span>
+                                <span class="text-slate-700">Spodní izolace staveb</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-blue-700 text-xs"></i>
+                                </span>
+                                <span class="text-slate-700">Zateplení střech</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="order-1 lg:order-2 img-zoom-wrap overflow-hidden rounded-2xl aspect-video">
+                        <img src="img/body_2.webp" alt="Izolace teras a balkónů" class="img-zoom w-full h-full object-cover">
+                    </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="bg-white p-8 rounded-lg shadow-sm">
-                    <h3 class="text-2xl font-semibold mb-4">Hydroizolace střech</h3>
-                    <p class="text-gray-600 mb-4">
-                        Specializujeme se na PVC hydroizolace plochých střech rodinných domků a bytových domů. Nabízíme kompletní realizace střech včetně klempířských prvků a prací na míru. Používáme moderní hydroizolační materiály a technologie pro dokonalou ochranu před vodou.
-                    </p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Ploché střechy rodinných domů</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Ploché střechy bytových domů</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Klempířské prvky a práce</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Kompletní realizace střech</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Kompletní dodávka materiálu</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Záruka na provedené práce</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-sm">
-                    <h3 class="text-2xl font-semibold mb-4">Další izolační práce</h3>
-                    <p class="text-gray-600 mb-4">
-                        Kromě střech nabízíme také izolace teras, balkónů, zahradních jezírek a spodní izolace staveb proti radonu a zemní vlhkosti.
-                    </p>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Izolace teras a balkónů</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Zahradní jezírka</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Spodní izolace staveb</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Zateplení střech</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-12 text-center">
-                <a href="#kontakt" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+
+            <div class="mt-16 reveal">
+                <a href="#kontakt" class="inline-block btn-primary bg-blue-700 hover:bg-blue-800 text-white px-8 py-4 rounded-lg font-medium">
                     Získejte zdarma cenovou nabídku
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Dodavatelé -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12">Naši dodavatelé</h2>
-            <p class="text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-                Spolupracujeme pouze s předními výrobci izolačních materiálů, abychom vám zajistili nejvyšší kvalitu provedení.
+    <!-- ── DODAVATELÉ ── -->
+    <section class="py-14 bg-white border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-xs font-semibold tracking-widest uppercase text-slate-400 text-center mb-10">Pracujeme s prověřenými značkami</p>
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-8 items-center justify-items-center">
+                <div class="w-full flex justify-center">
+                    <img src="img/logo_bauder.svg" alt="Bauder" class="h-10 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                </div>
+                <div class="w-full flex justify-center">
+                    <img src="img/logo_sika.svg" alt="Sika" class="h-10 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                </div>
+                <div class="w-full flex justify-center">
+                    <img src="img/logo_protan.svg" alt="Protan" class="h-10 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                </div>
+                <div class="w-full flex justify-center">
+                    <img src="img/logo_fatra_blue.png" alt="Fatra" class="h-10 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                </div>
+                <div class="w-full flex justify-center">
+                    <img src="img/logo_bachl.webp" alt="Bachl" class="h-10 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                </div>
+                <div class="w-full flex justify-center">
+                    <img src="img/logo_busscherhoffmann.jpeg" alt="Busscher &amp; Hoffmann" class="h-10 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PROČ IZOLOVAT ── -->
+    <section id="proc-izolovat" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 reveal">
+                <span class="section-label mb-3 block">Proč izolovat</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">Proč investovat do izolace?</h2>
+            </div>
+            <!-- 2×2 stats grid – žádné identické sloupce, čísla jako vizuální kotva -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-200 rounded-2xl overflow-hidden border border-slate-200">
+                <div class="bg-white p-10 reveal">
+                    <div class="text-5xl font-bold text-slate-900 stat-num mb-3 tracking-tight">+50 %</div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Ochrana konstrukce</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm">Izolace chrání stavbu před vlhkostí a prodlužuje její životnost. Bez správné hydroizolace může vlhkost narušit statiku budovy.</p>
+                </div>
+                <div class="bg-white p-10 reveal reveal-delay-1">
+                    <div class="text-5xl font-bold text-slate-900 stat-num mb-3 tracking-tight">60 %</div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Úspora nákladů</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm">Správně provedená hydroizolace výrazně snižuje náklady na opravy. Prevence je vždy levnější než řešení škod způsobených vodou.</p>
+                </div>
+                <div class="bg-white p-10 reveal reveal-delay-2">
+                    <div class="text-5xl font-bold text-slate-900 stat-num mb-3 tracking-tight">+70 %</div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Pohodlí a zdraví</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm">Hydroizolace eliminuje plísně a zlepšuje kvalitu vnitřního prostředí. Suché stěny znamenají zdravější domov i pracovní prostředí.</p>
+                </div>
+                <div class="bg-white p-10 reveal reveal-delay-3">
+                    <div class="text-5xl font-bold text-slate-900 stat-num mb-3 tracking-tight">+20 %</div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Zvýšení hodnoty</h3>
+                    <p class="text-slate-500 leading-relaxed text-sm">Dobře izolovaná stavba má vyšší tržní hodnotu. Kvalitní izolace je investice, která se vrátí při prodeji i v každodenním provozu.</p>
+                </div>
+            </div>
+            <p class="mt-8 text-slate-500 text-sm text-center">
+                Zajímá vás více? <a href="#kontakt" class="text-blue-700 font-medium hover:underline">Kontaktujte nás</a> a společně najdeme řešení pro váš projekt.
             </p>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center justify-items-center">
-                <div class="p-4">
-                    <img src="img/logo_bauder.svg" alt="Bauder" class="w-full h-auto max-h-16 object-contain md:grayscale hover:grayscale-0 transition-all duration-300">
+        </div>
+    </section>
+
+    <!-- ── GALERIE ── -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 reveal">
+                <span class="section-label mb-3 block">Reference</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">Naše realizace</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="gallery-item reveal group cursor-pointer" tabindex="0" role="button"
+                     aria-label="Zobrazit realizaci: Hala zemědělské techniky"
+                     onclick="openModal('img/IMG_6284.webp', 'Hala zemědělské techniky', 'Prosiměřice')"
+                     onkeydown="if(event.key==='Enter')openModal('img/IMG_6284.webp', 'Hala zemědělské techniky', 'Prosiměřice')">
+                    <div class="img-zoom-wrap overflow-hidden rounded-2xl aspect-[4/3] mb-3">
+                        <img src="img/IMG_6284.webp" alt="Realizace hydroizolace střechy – Hala zemědělské techniky, Prosiměřice" class="img-zoom w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors duration-200">Hala zemědělské techniky</h3>
+                    <p class="text-slate-500 text-sm mt-0.5">Prosiměřice</p>
                 </div>
-                <div class="p-4">
-                    <img src="img/logo_sika.svg" alt="Sika" class="w-full h-auto max-h-16 object-contain md:grayscale hover:grayscale-0 transition-all duration-300">
+
+                <div class="gallery-item reveal reveal-delay-1 group cursor-pointer" tabindex="0" role="button"
+                     aria-label="Zobrazit realizaci: Hala zemědělské techniky"
+                     onclick="openModal('img/IMG_6328.webp', 'Hala zemědělské techniky', 'Prosiměřice')"
+                     onkeydown="if(event.key==='Enter')openModal('img/IMG_6328.webp', 'Hala zemědělské techniky', 'Prosiměřice')">
+                    <div class="img-zoom-wrap overflow-hidden rounded-2xl aspect-[4/3] mb-3">
+                        <img src="img/IMG_6328.webp" alt="Realizace hydroizolace střechy – Hala zemědělské techniky, Prosiměřice" class="img-zoom w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors duration-200">Hala zemědělské techniky</h3>
+                    <p class="text-slate-500 text-sm mt-0.5">Prosiměřice</p>
                 </div>
-                <div class="p-4">
-                    <img src="img/logo_protan.svg" alt="Protan" class="w-full h-auto max-h-16 object-contain md:grayscale hover:grayscale-0 transition-all duration-300">
+
+                <div class="gallery-item reveal reveal-delay-2 group cursor-pointer" tabindex="0" role="button"
+                     aria-label="Zobrazit realizaci: Bytový dům"
+                     onclick="openModal('img/IMG_6426.webp', 'Bytový dům', 'Pražská, Znojmo')"
+                     onkeydown="if(event.key==='Enter')openModal('img/IMG_6426.webp', 'Bytový dům', 'Pražská, Znojmo')">
+                    <div class="img-zoom-wrap overflow-hidden rounded-2xl aspect-[4/3] mb-3">
+                        <img src="img/IMG_6426.webp" alt="Realizace izolace bytového domu – Pražská, Znojmo" class="img-zoom w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors duration-200">Bytový dům</h3>
+                    <p class="text-slate-500 text-sm mt-0.5">Pražská, Znojmo</p>
                 </div>
-                <div class="p-4">
-                    <img src="img/logo_fatra_blue.png" alt="Fatra" class="w-full h-auto max-h-16 object-contain md:grayscale hover:grayscale-0 transition-all duration-300">
+
+                <div class="gallery-item reveal reveal-delay-1 group cursor-pointer" tabindex="0" role="button"
+                     aria-label="Zobrazit realizaci: Rodinný dům"
+                     onclick="openModal('img/IMG_6808.webp', 'Rodinný dům', 'Bojanovice')"
+                     onkeydown="if(event.key==='Enter')openModal('img/IMG_6808.webp', 'Rodinný dům', 'Bojanovice')">
+                    <div class="img-zoom-wrap overflow-hidden rounded-2xl aspect-[4/3] mb-3">
+                        <img src="img/IMG_6808.webp" alt="Realizace hydroizolace rodinného domu – Bojanovice" class="img-zoom w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors duration-200">Rodinný dům</h3>
+                    <p class="text-slate-500 text-sm mt-0.5">Bojanovice</p>
                 </div>
-                <div class="p-4">
-                    <img src="img/logo_bachl.webp" alt="Bachl" class="w-full h-auto max-h-16 object-contain md:grayscale hover:grayscale-0 transition-all duration-300">
-                </div>
-                <div class="p-4">
-                    <img src="img/logo_busscherhoffmann.jpeg" alt="Busscher & Hoffmann" class="w-full h-auto max-h-16 object-contain md:grayscale hover:grayscale-0 transition-all duration-300">
+
+                <div class="gallery-item reveal reveal-delay-2 group cursor-pointer" tabindex="0" role="button"
+                     aria-label="Zobrazit realizaci: Cukrárna AD ASTRA"
+                     onclick="openModal('img/IMG_6839.webp', 'Cukrárna AD ASTRA', 'Hnánice')"
+                     onkeydown="if(event.key==='Enter')openModal('img/IMG_6839.webp', 'Cukrárna AD ASTRA', 'Hnánice')">
+                    <div class="img-zoom-wrap overflow-hidden rounded-2xl aspect-[4/3] mb-3">
+                        <img src="img/IMG_6839.webp" alt="Realizace izolace střechy – Cukrárna AD ASTRA, Hnánice" class="img-zoom w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors duration-200">Cukrárna AD ASTRA</h3>
+                    <p class="text-slate-500 text-sm mt-0.5">Hnánice</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Proč izolovat -->
-    <section id="proc-izolovat" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12">Proč izolovat?</h2>
-            <p class="text-gray-600 text-lg text-center max-w-3xl mx-auto mb-12">
-                Kvalitní izolace je základem každé stavby. Zajímá vás, jak vám může profesionální izolace pomoci ušetřit a chránit váš dům? 
-                <a href="#kontakt" class="text-blue-600 hover:text-blue-800 font-medium">Kontaktujte nás</a> a společně najdeme nejlepší řešení pro váš projekt.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="p-6 bg-gray-50 rounded-lg">
-                    <i class="fas fa-shield-alt text-4xl text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Ochrana konstrukce</h3>
-                    <p class="text-gray-600 mb-2">Izolace chrání stavbu před vlhkostí a prodlužuje její životnost <span class="text-blue-600 font-bold">až o 50 %</span>.</p>
-                    <p class="text-gray-500 text-sm">Bez správné hydroizolace může vlhkost vážně narušit statiku budovy.</p>
-                </div>
-                <div class="p-6 bg-gray-50 rounded-lg">
-                    <i class="fas fa-euro-sign text-4xl text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Úspora nákladů</h3>
-                    <p class="text-gray-600 mb-2">Správně provedená hydroizolace snižuje náklady na opravy <span class="text-blue-600 font-bold">až o 60 %</span>.</p>
-                    <p class="text-gray-500 text-sm">Prevence je vždy levnější než řešení škod způsobených vodou.</p>
-                </div>
-                <div class="p-6 bg-gray-50 rounded-lg">
-                    <i class="fas fa-home text-4xl text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Pohodlí a zdraví</h3>
-                    <p class="text-gray-600 mb-2">Hydroizolace eliminuje plísně a zlepšuje kvalitu vnitřního prostředí <span class="text-blue-600 font-bold">až o 70 %</span>.</p>
-                    <p class="text-gray-500 text-sm">Suché stěny = zdravější domov i pracovní prostředí.</p>
-                </div>
-                <div class="p-6 bg-gray-50 rounded-lg">
-                    <i class="fas fa-chart-line text-4xl text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Zvýšení hodnoty</h3>
-                    <p class="text-gray-600 mb-2">Dobře izolovaná stavba má <span class="text-blue-600 font-bold">až o 20 %</span> vyšší tržní hodnotu.</p>
-                    <p class="text-gray-500 text-sm">Kvalitní izolace je investice, která se vrátí.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Galerie -->
-    <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12">Naše realizace</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Galerie item -->
-                <div class="group relative cursor-pointer" onclick="openModal('img/IMG_6284.webp', 'Hala zemědělské techniky', 'Prosiměřice')">
-                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg">
-                        <img src="img/IMG_6284.webp" 
-                             alt="Realizace izolace střechy" 
-                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="text-xl font-semibold">Hala zemědělské techniky</h3>
-                        <p class="text-gray-600">Prosiměřice</p>
-                    </div>
-                </div>
-
-                <div class="group relative cursor-pointer" onclick="openModal('img/IMG_6328.webp', 'Hala zemědělské techniky', 'Prosiměřice')">
-                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg">
-                        <img src="img/IMG_6328.webp" 
-                             alt="Realizace izolace terasy" 
-                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="text-xl font-semibold">Hala zemědělské techniky</h3>
-                        <p class="text-gray-600">Prosiměřice</p>
-                    </div>
-                </div>
-
-                <div class="group relative cursor-pointer" onclick="openModal('img/IMG_6426.webp', 'Bytový dům', 'Pražská, Znojmo')">
-                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg">
-                        <img src="img/IMG_6426.webp" 
-                             alt="Realizace zateplení" 
-                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="text-xl font-semibold">Bytový dům</h3>
-                        <p class="text-gray-600">Pražská, Znojmo</p>
-                    </div>
-                </div>
-
-                <div class="group relative cursor-pointer" onclick="openModal('img/IMG_6808.webp', 'Rodinný dům', 'Bojanovice')">
-                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg">
-                        <img src="img/IMG_6808.webp" 
-                             alt="Realizace hydroizolace" 
-                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="text-xl font-semibold">Rodinný dům</h3>
-                        <p class="text-gray-600">Bojanovice</p>
-                    </div>
-                </div>
-
-                <div class="group relative cursor-pointer" onclick="openModal('img/IMG_6839.webp', 'Cukrárna AD ASTRA', 'Hnánice')">
-                    <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg">
-                        <img src="img/IMG_6839.webp" 
-                             alt="Realizace izolace střechy" 
-                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="text-xl font-semibold">Cukrárna AD ASTRA</h3>
-                        <p class="text-gray-600">Hnánice</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal -->
-    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden">
-        <div class="absolute top-4 right-4">
-            <button onclick="closeModal()" class="text-white hover:text-gray-300">
-                <i class="fas fa-times text-3xl"></i>
-            </button>
-        </div>
-        <div class="flex items-center justify-center h-full p-4">
+    <!-- ── MODAL ── -->
+    <div id="imageModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 hidden" role="dialog" aria-modal="true" aria-label="Náhled realizace">
+        <button onclick="closeModal()" class="absolute top-5 right-5 text-white/60 hover:text-white transition-colors p-2" aria-label="Zavřít náhled">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <div class="flex items-center justify-center h-full p-4 md:p-8">
             <div class="max-w-4xl w-full">
-                <img id="modalImage" src="" alt="" class="max-h-[80vh] w-full object-contain">
-                <div class="mt-4 text-white text-center">
-                    <h3 id="modalTitle" class="text-2xl font-semibold"></h3>
-                    <p id="modalDescription" class="text-gray-300"></p>
+                <img id="modalImage" src="" alt="" class="max-h-[80vh] w-full object-contain rounded-xl">
+                <div class="mt-5 text-center">
+                    <h3 id="modalTitle" class="text-white text-xl font-semibold"></h3>
+                    <p id="modalDescription" class="text-slate-400 text-sm mt-1"></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Kontaktní formulář -->
-    <section id="kontakt" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12">Kontaktujte nás</h2>
-            <div class="max-w-4xl mx-auto">
-                <form action="https://formsubmit.co/87b0771455630739501d14e9f5008c07" method="POST" class="bg-white p-8 rounded-lg shadow-sm mb-12">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="https://izolacekracman.cz">
-                    <input type="hidden" name="_subject" value="Nový formulář z webu - Hydroizolace Petr Kráčman">
-                    <div class="mb-6">
-                        <label for="jmeno" class="block text-gray-700 mb-2">Jméno</label>
-                        <input type="text" id="jmeno" name="jmeno" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <!-- ── KONTAKT ── -->
+    <section id="kontakt" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 reveal">
+                <span class="section-label mb-3 block">Kontakt</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">Kontaktujte nás</h2>
+                <p class="text-slate-600 max-w-xl leading-relaxed">Napište nám nebo zavolejte – cenové nabídky zpracujeme zdarma a nezávazně.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 xl:gap-16 items-start">
+                <!-- Formulář -->
+                <div class="reveal">
+                    <form action="https://formsubmit.co/87b0771455630739501d14e9f5008c07" method="POST" class="bg-white rounded-2xl border border-slate-200 p-8 md:p-10">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://izolacekracman.cz">
+                        <input type="hidden" name="_subject" value="Nový formulář z webu - Hydroizolace Petr Kráčman">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="jmeno" class="block text-sm font-medium text-slate-700 mb-2">Jméno</label>
+                                <input type="text" id="jmeno" name="jmeno" required placeholder="Vaše jméno"
+                                       class="form-input w-full px-4 py-3 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 bg-slate-50">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-700 mb-2">E-mail</label>
+                                <input type="email" id="email" name="email" required placeholder="vas@email.cz"
+                                       class="form-input w-full px-4 py-3 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 bg-slate-50">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="telefon" class="block text-sm font-medium text-slate-700 mb-2">
+                                Telefon <span class="text-slate-400 font-normal">(nepovinné)</span>
+                            </label>
+                            <input type="tel" id="telefon" name="telefon" placeholder="+420 xxx xxx xxx"
+                                   class="form-input w-full px-4 py-3 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 bg-slate-50">
+                        </div>
+                        <div class="mb-8">
+                            <label for="zprava" class="block text-sm font-medium text-slate-700 mb-2">Zpráva</label>
+                            <textarea id="zprava" name="zprava" rows="5" required placeholder="Popište váš projekt nebo dotaz..."
+                                      class="form-input w-full px-4 py-3 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 bg-slate-50 resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full bg-blue-700 hover:bg-blue-800 text-white py-3.5 rounded-lg font-medium">
+                            Odeslat zprávu
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Kontaktní info + mapa -->
+                <div class="reveal reveal-delay-2">
+                    <div class="space-y-5 mb-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-blue-700 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500 mb-0.5 font-medium uppercase tracking-wide">Telefon</div>
+                                <a href="tel:+420722917907" class="text-slate-900 font-semibold hover:text-blue-700 transition-colors">+420 722 917 907</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-blue-700 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500 mb-0.5 font-medium uppercase tracking-wide">E-mail</div>
+                                <a href="mailto:kracmanp@seznam.cz" class="text-slate-900 font-semibold hover:text-blue-700 transition-colors">kracmanp@seznam.cz</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-blue-700 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500 mb-0.5 font-medium uppercase tracking-wide">Sídlo</div>
+                                <span class="text-slate-900 font-semibold">Prosiměřice 207, 671 61</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-clock text-blue-700 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500 mb-0.5 font-medium uppercase tracking-wide">Pracovní doba</div>
+                                <span class="text-slate-900 font-semibold">Po–Pá 7:00–16:00</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-6">
-                        <label for="email" class="block text-gray-700 mb-2">E-mail</label>
-                        <input type="email" id="email" name="email" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div class="mb-6">
-                        <label for="telefon" class="block text-gray-700 mb-2">Telefon</label>
-                        <input type="tel" id="telefon" name="telefon" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div class="mb-6">
-                        <label for="zprava" class="block text-gray-700 mb-2">Zpráva</label>
-                        <textarea id="zprava" name="zprava" rows="4" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300">
-                        Odeslat zprávu
-                    </button>
-                </form>
-                <div class="w-full">
-                    <h3 class="text-xl font-semibold mb-4 text-center">Kde nás najdete</h3>
-                    <div class="aspect-w-16 aspect-h-9">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3058.049364381488!2d16.182186183846063!3d48.884487782039294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4712acf2678ca629%3A0x2affdc654d8d131b!2zUHJvc2ltxJvFmWljZSAyMDcsIDY3MSA2MSBQcm9zaW3Em8WZaWNl!5e1!3m2!1scs!2scz!4v1745679652622!5m2!1scs!2scz" 
-                            width="100%" 
-                            height="450" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
+                    <div class="rounded-2xl overflow-hidden border border-slate-200">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3058.049364381488!2d16.182186183846063!3d48.884487782039294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4712acf2678ca629%3A0x2affdc654d8d131b!2zUHJvc2ltxJvFmWljZSAyMDcsIDY3MSA2MSBQcm9zaW3Em8WZaWNl!5e1!3m2!1scs!2scz!4v1745679652622!5m2!1scs!2scz"
+                            width="100%"
+                            height="260"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Mapa – Prosiměřice 207">
                         </iframe>
                     </div>
                 </div>
@@ -451,24 +687,30 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- ── FOOTER ── -->
+    <footer class="bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-start pb-8 border-b border-slate-800">
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">Hydroizolace - Petr Kráčman</h3>
-                    <p class="text-gray-400">Profesionální izolace a zateplení střech</p>
+                    <div class="text-xl font-bold tracking-tight mb-2">Hydroizolace<span class="text-blue-400">.</span></div>
+                    <p class="text-slate-400 text-sm">Petr Kráčman – profesionální izolace a zateplení střech</p>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">Kontakt</h3>
-                    <p class="text-gray-400">Email: <a href="mailto:kracmanp@seznam.cz" class="hover:text-white transition-colors">kracmanp@seznam.cz</a></p>
-                    <p class="text-gray-400">Tel: <a href="tel:+420722917907" class="hover:text-white transition-colors">+420 722 917 907</a></p>
-                    <p class="text-gray-400">Sídlo: Prosiměřice 207, 671 61</p>
+                <div class="flex flex-wrap gap-6 text-sm text-slate-400">
+                    <a href="#o-nas"         class="hover:text-white transition-colors">O nás</a>
+                    <a href="#sluzby"        class="hover:text-white transition-colors">Služby</a>
+                    <a href="#proc-izolovat" class="hover:text-white transition-colors">Proč izolovat</a>
+                    <a href="#kontakt"       class="hover:text-white transition-colors">Kontakt</a>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2026 Hydroizolace Petr Kráčman | IČO: 23028742</p>
-                <p class="text-sm mt-2"><a href="https://zdenekpodany.cz" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Web z dílny Zdeněk Podaný | Weby</a></p>
+            <div class="pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-sm text-slate-500">
+                <div class="flex flex-wrap gap-x-6 gap-y-1">
+                    <span>&copy; 2026 Hydroizolace Petr Kráčman</span>
+                    <a href="https://ares.gov.cz/ekonomicke-subjekty/res/23028742" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">IČO: 23028742</a>
+                    <a href="Podminky_a_Zasady_Kracman.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">Podmínky a zásady</a>
+                </div>
+                <a href="https://zdenekpodany.cz" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">
+                    Web z dílny Zdeněk Podaný
+                </a>
             </div>
         </div>
     </footer>
@@ -476,26 +718,27 @@
     <script src="script.js"></script>
     <script src="cookie-consent.js"></script>
 
-    <!-- Cookie Consent Banner -->
-    <div id="cookieConsent" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 z-50 hidden">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="flex-1">
-                    <p class="text-gray-600">
-                        Tento web používá cookies pro zlepšení vašeho zážitku. Používáním tohoto webu souhlasíte s našimi 
-                        <a href="Podminky_a_Zasady_Kracman.pdf" target="_blank" class="text-blue-600 hover:text-blue-800">Podmínkami použití a Zásadami ochrany osobních údajů</a>.
+    <!-- ── COOKIE CONSENT ── -->
+    <div id="cookieConsent" class="fixed bottom-0 left-0 right-0 z-50 hidden">
+        <div class="max-w-7xl mx-auto px-4 pb-4">
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 px-6 py-5">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Tento web používá cookies pro zlepšení vašeho zážitku. Více informací v
+                        <a href="Podminky_a_Zasady_Kracman.pdf" target="_blank" class="text-blue-700 hover:underline font-medium">Zásadách ochrany osobních údajů</a>.
                     </p>
-                </div>
-                <div class="flex gap-4">
-                    <button id="acceptCookies" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                        Přijmout vše
-                    </button>
-                    <button id="rejectCookies" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition duration-300">
-                        Odmítnout
-                    </button>
+                    <div class="flex gap-3 flex-shrink-0">
+                        <button id="rejectCookies" class="btn-ghost px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-lg transition-colors">
+                            Odmítnout
+                        </button>
+                        <button id="acceptCookies" class="btn-primary px-5 py-2.5 bg-blue-700 hover:bg-blue-800 text-white text-sm font-medium rounded-lg">
+                            Přijmout vše
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+</html>
 </html> 

@@ -2,9 +2,11 @@
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        // Close mobile menu on nav click
+        const mm = document.getElementById('mobile-menu');
+        if (mm) mm.classList.add('hidden');
     });
 });
 
@@ -13,148 +15,196 @@ function calculateYearsOfExperience() {
     const startYear = 2006;
     const currentYear = new Date().getFullYear();
     const years = currentYear - startYear;
-    document.getElementById('years-of-experience').textContent = years;
+    const el = document.getElementById('years-of-experience');
+    if (el) el.textContent = years;
 }
 
-// Modal functionality
-const modal = document.getElementById('imageModal');
-const modalContent = modal.querySelector('div > div'); // Vnitřní kontejner s obrázkem
-const modalImage = document.getElementById('modalImage');
+// ── Mobile menu toggle ──────────────────────────────────────────────────────
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu    = document.getElementById('mobile-menu');
 
-// Zabráníme propagaci kliknutí na obrázek a jeho kontejner
-modalContent.addEventListener('click', function(e) {
-    e.stopPropagation();
-});
+if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        mobileMenuBtn.innerHTML = isHidden
+            ? '<i class="fas fa-bars text-lg"></i>'
+            : '<i class="fas fa-times text-lg"></i>';
+    });
+}
 
-modalImage.addEventListener('click', function(e) {
-    e.stopPropagation();
-});
+// ── Sticky nav glass effect ─────────────────────────────────────────────────
+const siteHeader = document.getElementById('site-header');
+
+function updateNav() {
+    if (!siteHeader) return;
+    const scrolled = window.scrollY > 60;
+    siteHeader.classList.toggle('scrolled', scrolled);
+
+    siteHeader.querySelectorAll('.nav-link').forEach(link => {
+        if (scrolled) {
+            link.classList.remove('text-white/80', 'hover:text-white');
+            link.classList.add('text-slate-600', 'hover:text-slate-900');
+        } else {
+            link.classList.add('text-white/80', 'hover:text-white');
+            link.classList.remove('text-slate-600', 'hover:text-slate-900');
+        }
+    });
+
+    const logo = siteHeader.querySelector('.nav-logo');
+    if (logo) {
+        logo.classList.toggle('text-white', !scrolled);
+        logo.classList.toggle('text-slate-900', scrolled);
+        const dot = logo.querySelector('span');
+        if (dot) {
+            dot.classList.toggle('text-blue-400', !scrolled);
+            dot.classList.toggle('text-blue-700', scrolled);
+        }
+    }
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.classList.toggle('text-white', !scrolled);
+        mobileMenuBtn.classList.toggle('text-slate-700', scrolled);
+    }
+}
+
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+// ── Scroll reveal via IntersectionObserver ──────────────────────────────────
+function initReveal() {
+    const elements = document.querySelectorAll('.reveal');
+    if (!elements.length || !('IntersectionObserver' in window)) {
+        elements.forEach(el => el.classList.add('visible'));
+        return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+
+    elements.forEach(el => observer.observe(el));
+}
+initReveal();
+
+// ── Modal ───────────────────────────────────────────────────────────────────
+const modal        = document.getElementById('imageModal');
+const modalContent = modal ? modal.querySelector('.flex > div') : null;
+const modalImage   = document.getElementById('modalImage');
+
+if (modalContent) {
+    modalContent.addEventListener('click', e => e.stopPropagation());
+}
+if (modalImage) {
+    modalImage.addEventListener('click', e => e.stopPropagation());
+}
 
 function openModal(imageSrc, title, description) {
-    const modalTitle = document.getElementById('modalTitle');
+    if (!modal) return;
+    const modalTitle       = document.getElementById('modalTitle');
     const modalDescription = document.getElementById('modalDescription');
-
-    modalImage.src = imageSrc;
-    modalImage.alt = title;
-    modalTitle.textContent = title;
-    modalDescription.textContent = description;
-    
+    if (modalImage)       { modalImage.src = imageSrc; modalImage.alt = title; }
+    if (modalTitle)       modalTitle.textContent = title;
+    if (modalDescription) modalDescription.textContent = description;
     modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
+    if (!modal) return;
     modal.classList.add('hidden');
-    document.body.style.overflow = ''; // Restore scrolling
+    document.body.style.overflow = '';
 }
 
-// Close modal when clicking outside the image
-modal.addEventListener('click', function(e) {
-    // Zkontrolujeme, jestli kliknutí bylo mimo vnitřní kontejner
-    if (!modalContent.contains(e.target)) {
-        closeModal();
-    }
+if (modal) {
+    modal.addEventListener('click', e => {
+        if (!modalContent || !modalContent.contains(e.target)) closeModal();
+    });
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
 });
 
-// Close modal with Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeModal();
-    }
-});
-
-// Carousel functionality
+// ── Carousel (guarded – elements may not be present) ───────────────────────
 const carouselTrack = document.querySelector('.carousel-track');
 const carouselItems = document.querySelectorAll('.carousel-item');
-const dots = document.querySelectorAll('.carousel-dot');
-const prevButton = document.querySelector('.carousel-prev');
-const nextButton = document.querySelector('.carousel-next');
+const dots          = document.querySelectorAll('.carousel-dot');
+const prevButton    = document.querySelector('.carousel-prev');
+const nextButton    = document.querySelector('.carousel-next');
 
-let currentIndex = 0;
-const itemWidth = carouselItems[0].offsetWidth;
+if (carouselTrack && carouselItems.length > 0) {
+    let currentIndex = 0;
+    const itemWidth  = carouselItems[0].offsetWidth;
 
-// Funkce pro načtení obrázku
-function loadImage(imgElement) {
-    const src = imgElement.getAttribute('data-src');
-    if (!src) return;
+    function loadImage(imgElement) {
+        if (!imgElement) return;
+        const src = imgElement.getAttribute('data-src');
+        if (!src) return;
+        const spinner = imgElement.parentElement
+            ? imgElement.parentElement.querySelector('.loading-spinner')
+            : null;
+        imgElement.onload = () => {
+            imgElement.classList.remove('hidden');
+            if (spinner) spinner.style.display = 'none';
+        };
+        imgElement.src = src;
+    }
 
-    const loadingSpinner = imgElement.parentElement.querySelector('.loading-spinner');
-    
-    // Skryjeme spinner a zobrazíme obrázek po načtení
-    imgElement.onload = () => {
-        imgElement.classList.remove('hidden');
-        loadingSpinner.style.display = 'none';
-    };
+    function loadCurrentAndAdjacentImages() {
+        const prevIdx = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+        const nextIdx = (currentIndex + 1) % carouselItems.length;
+        loadImage(carouselItems[currentIndex].querySelector('img'));
+        loadImage(carouselItems[prevIdx].querySelector('img'));
+        loadImage(carouselItems[nextIdx].querySelector('img'));
+    }
 
-    // Nastavíme src, což spustí načítání
-    imgElement.src = src;
-}
+    function updateCarousel() {
+        carouselTrack.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('bg-blue-600', i === currentIndex);
+            dot.classList.toggle('bg-gray-300',  i !== currentIndex);
+        });
+        loadCurrentAndAdjacentImages();
+    }
 
-// Funkce pro načtení aktuálního a sousedních obrázků
-function loadCurrentAndAdjacentImages() {
-    const prevIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-    const nextIndex = (currentIndex + 1) % carouselItems.length;
-
-    // Načteme aktuální obrázek
-    const currentImg = carouselItems[currentIndex].querySelector('img');
-    loadImage(currentImg);
-
-    // Načteme sousední obrázky
-    const prevImg = carouselItems[prevIndex].querySelector('img');
-    const nextImg = carouselItems[nextIndex].querySelector('img');
-    loadImage(prevImg);
-    loadImage(nextImg);
-}
-
-function updateCarousel() {
-    carouselTrack.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('bg-blue-600', index === currentIndex);
-        dot.classList.toggle('bg-gray-300', index !== currentIndex);
+    if (prevButton) prevButton.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+        updateCarousel();
     });
-    
-    // Načteme obrázky při změně slide
+    if (nextButton) nextButton.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % carouselItems.length;
+        updateCarousel();
+    });
+    dots.forEach((dot, i) => dot.addEventListener('click', () => {
+        currentIndex = i;
+        updateCarousel();
+    }));
+
     loadCurrentAndAdjacentImages();
 }
 
-prevButton.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-    updateCarousel();
-});
-
-nextButton.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % carouselItems.length;
-    updateCarousel();
-});
-
-dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-        currentIndex = index;
-        updateCarousel();
+// ── Form submit handling ────────────────────────────────────────────────────
+const contactForm = document.querySelector('form');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        this.submit();
+        const formContainer = this.parentElement;
+        if (formContainer) {
+            formContainer.innerHTML = `
+                <div class="bg-green-50 border border-green-200 text-green-800 px-6 py-10 rounded-2xl text-center" role="alert">
+                    <div class="text-4xl mb-4"><i class="fas fa-circle-check text-green-600"></i></div>
+                    <strong class="text-xl font-semibold block mb-2">Zpráva odeslána</strong>
+                    <span class="text-green-700 text-sm">Ozveme se vám co nejdříve.</span>
+                </div>
+            `;
+        }
     });
-});
+}
 
-// Spustíme výpočet při načtení stránky
+// Init
 calculateYearsOfExperience();
-
-// Načteme první obrázek při načtení stránky
-loadCurrentAndAdjacentImages();
-
-// Form submit handling
-document.querySelector('form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Zde můžete přidat validaci formuláře
-    
-    // Odeslání formuláře
-    this.submit();
-    
-    // Zobrazení potvrzovací zprávy
-    const formContainer = this.parentElement;
-    formContainer.innerHTML = `
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-            <strong class="font-bold">Děkujeme!</strong>
-            <span class="block sm:inline"> Vaše zpráva byla úspěšně odeslána. Ozveme se vám co nejdříve.</span>
-        </div>
-    `;
-}); 
